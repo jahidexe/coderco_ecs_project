@@ -1,27 +1,23 @@
-# Use Node.js base image
-FROM node:20
-
-# Set working directory inside container
+# Stage 1: Install dependencies
+FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copy package files first
+# Copy package files first (Better caching)
 COPY app/package.json app/yarn.lock ./
 
 # Install dependencies
 RUN yarn install --frozen-lockfile
 
-# Copy all application files
+# Stage 2: Final minimal image
+FROM node:20-alpine
+WORKDIR /app
+
+# Copy only required files
+COPY --from=builder /app/node_modules ./node_modules
 COPY app/ ./
 
-# Expose port 3000
+# Expose port
 EXPOSE 3000
 
-# Set environment variables for React (Fixes long startup time)
-ENV WDS_SOCKET_PORT=0
-ENV CHOKIDAR_USEPOLLING=true
-ENV WATCHPACK_POLLING=true
-ENV FAST_REFRESH=true
-ENV HOST=0.0.0.0
-
-# Start React in development mode
+# Start React app
 CMD ["yarn", "start"]

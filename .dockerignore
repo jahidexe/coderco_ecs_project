@@ -1,0 +1,65 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Node.js dependencies
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build outputs
+dist
+build
+.next
+out
+coverage
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Development files
+*.log
+.editorconfig
+.eslintrc
+.prettierrc
+.vscode
+.idea
+*.md
+!README.md
+
+# Testing
+__tests__
+test
+tests
+*.test.js
+*.spec.js
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*
+
+# Temporary files
+*.swp
+*.swo
+*~
+tmp/
+temp/
+
+# Debug files
+.debug
+*.debug
+
+# Misc
+*.zip
+*.tar.gz
+*.tgz
+.cache
